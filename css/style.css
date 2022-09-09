@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Zeyada&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    min-width: 100%;
+    background-color: white;
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.encabezado{
+    background-color: black;
+}
+h1{
+    height: 3.5rem;
+    margin-bottom: 0;
+    padding-top: 2rem;
+    font-family: 'Zeyada', cursive;
+    color: white;
+    font-size: 3rem;
+}
+h2{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+h3{
+    margin-top: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.descripcion{
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    font-size: small;
+    font-weight: 300;
+    margin-bottom: 3rem;
+}
+footer{
+    padding: 1rem;
+    background-color: black;
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+    color: white;
+    font-size: small;
+    font-weight: 300;
+}
