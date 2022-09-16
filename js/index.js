@@ -3,16 +3,16 @@ function init(){
 // CONSTRUCCION DE LA GALERIA DESDE JS PARA QUE FUNCIONE COMO CARDS DE UN CARRITO
 let contGallery = document.getElementById("contGallery");
 let listaCuadros = [
-    {id: 1, titulo: "María de Bs As", medidas: "1.40 x 1m", tecnica: "acrílico sobre tela", precio: 14000, imagen: `../img/maria.jpg`, cantidad: 1},
-    {id: 2, titulo: "El sueño de un niño", medidas: "50 x 30cm", tecnica: "aquarela sobre papel", precio: 5000, imagen: `../img/sueno.jpg`, cantidad: 1},
-    {id: 3, titulo: "La Poesía", medidas: "30 x 40cm" , tecnica: "tinta y aquarela sobre papel", precio: 4500, imagen: `../img/laPoesia.jpg`, cantidad: 1},
+    {id: 1, titulo: "María de Bs As", medidas: "1.40 x 1m", tecnica: "acrílico sobre tela", precio: 14000, imagen: `./img/maria.jpg`, cantidad: 1},
+    {id: 2, titulo: "El sueño de un niño", medidas: "50 x 30cm", tecnica: "aquarela sobre papel", precio: 5000, imagen: `./img/sueno.jpg`, cantidad: 1},
+    {id: 3, titulo: "La Poesía", medidas: "30 x 40cm" , tecnica: "tinta y aquarela sobre papel", precio: 4500, imagen: `./img/laPoesia.jpg`, cantidad: 1},
     {id: 4, titulo: "La Doma", medidas: "40 x 50cm", tecnica: "lápiz y carbonilla sobre papel, técnica mixta", precio: 6000, imagen: `../img/laDoma.jpg`, cantidad: 1},
-    {id: 5, titulo: "Volar", medidas: "50 x 40cm", tecnica: "aquarela y grafito sobre papel", precio: 5500, imagen: `../img/volar.jpg`, cantidad: 1},
-    {id: 6, titulo: "La Ternura", medidas: "25 x 23cm", tecnica: "óleo sobre papel", precio: 4300, imagen: `../img/laTernura.jpg`, cantidad: 1},
-    {id: 7, titulo: "Butih", medidas: "35 x 25cm", tecnica: "acrílico y tinta sobre papel", precio: 4700, imagen: `../img/butih.jpg`, cantidad: 1},
-    {id: 8, titulo: "Metamorfosis", medidas: "24 x 32cm", tecnica: "acrílico y tinta sobre papel", precio: 4100, imagen: `../img/metamorfosis.jpg`, cantidad: 1},
-    {id: 9, titulo: "Árbol de la vida", medidas: "1 x 1m", tecnica: "óleo sobre tela", precio: 11000, imagen: `../img/arbolVida.jpg`, cantidad: 1},
-    {id: 10, titulo: "Madre tierra", medidas: "1 x 0.8m", tecnica: "óleo sobre tela, técnica mixta", precio: 11000, imagen: `../img/madreTierra.jpg`, cantidad: 1}
+    {id: 5, titulo: "Volar", medidas: "50 x 40cm", tecnica: "aquarela y grafito sobre papel", precio: 5500, imagen: `./img/volar.jpg`, cantidad: 1},
+    {id: 6, titulo: "La Ternura", medidas: "25 x 23cm", tecnica: "óleo sobre papel", precio: 4300, imagen: `./img/laTernura.jpg`, cantidad: 1},
+    {id: 7, titulo: "Butih", medidas: "35 x 25cm", tecnica: "acrílico y tinta sobre papel", precio: 4700, imagen: `./img/butih.jpg`, cantidad: 1},
+    {id: 8, titulo: "Metamorfosis", medidas: "24 x 32cm", tecnica: "acrílico y tinta sobre papel", precio: 4100, imagen: `./img/metamorfosis.jpg`, cantidad: 1},
+    {id: 9, titulo: "Árbol de la vida", medidas: "1 x 1m", tecnica: "óleo sobre tela", precio: 11000, imagen: `./img/arbolVida.jpg`, cantidad: 1},
+    {id: 10, titulo: "Madre tierra", medidas: "1 x 0.8m", tecnica: "óleo sobre tela, técnica mixta", precio: 11000, imagen: `./img/madreTierra.jpg`, cantidad: 1}
 ]
 
 for(const cuadro of listaCuadros){
@@ -29,7 +29,7 @@ for(const cuadro of listaCuadros){
                             <p class="pNgo"> <span class="spBld">Precio:</span> $${cuadro.precio} </p>
                         </div>
                         <div class="divFcenter">
-                            <button type="button" class="boton">Lo quiero!</button>
+                            <button type="button" class="boton id="agregar${cuadro.id}">Lo quiero!</button>
                         </div>
                     </div>
     `;
