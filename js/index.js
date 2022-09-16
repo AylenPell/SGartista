@@ -6,7 +6,7 @@ let listaCuadros = [
     {id: 1, titulo: "María de Bs As", medidas: "1.40 x 1m", tecnica: "acrílico sobre tela", precio: 14000, imagen: `./img/maria.jpg`, cantidad: 1},
     {id: 2, titulo: "El sueño de un niño", medidas: "50 x 30cm", tecnica: "aquarela sobre papel", precio: 5000, imagen: `./img/sueno.jpg`, cantidad: 1},
     {id: 3, titulo: "La Poesía", medidas: "30 x 40cm" , tecnica: "tinta y aquarela sobre papel", precio: 4500, imagen: `./img/laPoesia.jpg`, cantidad: 1},
-    {id: 4, titulo: "La Doma", medidas: "40 x 50cm", tecnica: "lápiz y carbonilla sobre papel, técnica mixta", precio: 6000, imagen: `../img/laDoma.jpg`, cantidad: 1},
+    {id: 4, titulo: "La Doma", medidas: "40 x 50cm", tecnica: "lápiz y carbonilla sobre papel, técnica mixta", precio: 6000, imagen: `./img/laDoma.jpg`, cantidad: 1},
     {id: 5, titulo: "Volar", medidas: "50 x 40cm", tecnica: "aquarela y grafito sobre papel", precio: 5500, imagen: `./img/volar.jpg`, cantidad: 1},
     {id: 6, titulo: "La Ternura", medidas: "25 x 23cm", tecnica: "óleo sobre papel", precio: 4300, imagen: `./img/laTernura.jpg`, cantidad: 1},
     {id: 7, titulo: "Butih", medidas: "35 x 25cm", tecnica: "acrílico y tinta sobre papel", precio: 4700, imagen: `./img/butih.jpg`, cantidad: 1},
