@@ -1,7 +1,4 @@
-function init(){
-
-// CONSTRUCCION DE LA GALERIA DESDE JS PARA QUE FUNCIONE COMO CARDS DE UN CARRITO
-let contGallery = document.getElementById("contGallery");
+// LISTADO DE PRODUCTOS
 let listaCuadros = [
     {id: 1, titulo: "María de Bs As", medidas: "1.40 x 1m", tecnica: "acrílico sobre tela", precio: 14000, imagen: `./img/maria.jpg`, cantidad: 1},
     {id: 2, titulo: "El sueño de un niño", medidas: "50 x 30cm", tecnica: "aquarela sobre papel", precio: 5000, imagen: `./img/sueno.jpg`, cantidad: 1},
@@ -12,79 +9,78 @@ let listaCuadros = [
     {id: 7, titulo: "Butih", medidas: "35 x 25cm", tecnica: "acrílico y tinta sobre papel", precio: 4700, imagen: `./img/butih.jpg`, cantidad: 1},
     {id: 8, titulo: "Metamorfosis", medidas: "24 x 32cm", tecnica: "acrílico y tinta sobre papel", precio: 4100, imagen: `./img/metamorfosis.jpg`, cantidad: 1},
     {id: 9, titulo: "Árbol de la vida", medidas: "1 x 1m", tecnica: "óleo sobre tela", precio: 11000, imagen: `./img/arbolVida.jpg`, cantidad: 1},
-    {id: 10, titulo: "Madre tierra", medidas: "1 x 0.8m", tecnica: "óleo sobre tela, técnica mixta", precio: 11000, imagen: `./img/madreTierra.jpg`, cantidad: 1}
+    {id: 10, titulo: "Madre tierra", medidas: "1 x 0.8m", tecnica: "óleo sobre tela, técnica mixta", precio: 11000, imagen: `./img/madreTierra.jpg`, cantidad: 1},
+    {id: 11, titulo: "El rapto de Proserpina", medidas: "60 x 40cm", tecnica: "tinta y aquarela sobre papel", precio: 6800, imagen: `./img/proserpina.jpg`, cantidad: 1},
+    {id: 12, titulo: "Discapacidades", medidas: "60 x 40cm", tecnica: "aquarela y grafito sobre papel", precio: 6800, imagen: `./img/discapacidad.jpg`, cantidad: 1}
 ]
 
+// CONSTRUCCION DE LA GALERIA
+let contGallery = document.getElementById("contGallery");
 for(const cuadro of listaCuadros){
     let div = document.createElement("div");
     div.innerHTML = `
-                    <div class="divCard"> 
-                        <div class="divFcenter">
-                            <img class="imgCard" src=${cuadro.imagen} alt=${cuadro.titulo}> 
-                        </div> 
-                        <div>   
-                            <h2 class="h2Ngo"> ${cuadro.titulo} </h2>
-                            <p class="pNgo"> <span class="spBld">Técnica:</span> ${cuadro.tecnica} </p>
-                            <p class="pNgo"> <span class="spBld">Medidas:</span> ${cuadro.medidas} </p>
-                            <p class="pNgo"> <span class="spBld">Precio:</span> $${cuadro.precio} </p>
-                        </div>
-                        <div class="divFcenter">
-                            <button type="button" class="boton id="agregar${cuadro.id}">Lo quiero!</button>
-                        </div>
-                    </div>
+        <div class="divCard"> 
+            <div class="divFcenter">
+                <img class="imgCard" src=${cuadro.imagen} alt=${cuadro.titulo}> 
+            </div> 
+            <div>   
+                <h2 class="h2Ngo"> ${cuadro.titulo} </h2>
+                <p class="pNgo"> <span class="spBld">Técnica:</span> ${cuadro.tecnica} </p>
+                <p class="pNgo"> <span class="spBld">Medidas:</span> ${cuadro.medidas} </p>
+                <p class="pNgo"> <span class="spBld">Precio:</span> $${cuadro.precio} </p>
+            </div>
+            <div class="divFcenter">
+                <button type="button" class="boton" id="agregar${cuadro.id}" onclick="agregar(${cuadro.id})">Lo quiero!</button>
+            </div>
+        </div>
     `;
     contGallery.append(div);
 }
 
-// INTERACCION CON EL FORMULARIO DE CONTACTO
-function recogeDatos (evento) {
-    evento.preventDefault ();
-
-    let nombre = document.querySelector("#nombre").value;
-    let cel = document.querySelector("#cel").value;
-    let mensaje = document.querySelector("#mensaje");
-    let texto = `Hola ${nombre}, 😊 tu mensaje ha sido enviado!
-                Te estare contactando al celular ${cel} para responderte.`;
-    
-    mensaje.textContent = texto;
-}
-function eliminar () {
-    mensaje.remove();       
-}
-
-let miForm = document.querySelector("#formContacto");
-let botonB = document.querySelector("#btnB");
-miForm.addEventListener("submit", recogeDatos);
-botonB.addEventListener("click", eliminar);
-
-
-
-/*     BORRE LOS PROMPTS Y ALERTS, FALTA ARMAR LA PARTE DEL CARRITO
+// CARRITO DE COMPRAS
 let carrito = [];
 
-let menuCuadros = listaCuadros.map (cuadro => {
-    return `ID: ${cuadro.id} | Titulo: ${cuadro.titulo} | Medidas: ${cuadro.medidas} | Tecnica: ${cuadro.tecnica} | Precio $${cuadro.precio} \n`
-});
+let itemsCarrito = document.getElementById("itemsCarrito");
 
-let boton = document.getElementsByClassName("boton");
-boton.addEventListener("click", comprar);  
+function agregar (id){
+    console.log (id);
+    let cuadroElegido = listaCuadros.find (cuadro => id === cuadro.id && cuadro.cantidad === 1);
 
-let idElegido = "";
-const comprar = function (mensaje){
-    idElegido = //como identifica que boton apreto???
-    let cuadroElegido = listaCuadros.find (cuadro => cuadro.id === idElegido);
-    if (cuadroElegido) { 
+    if (cuadroElegido){
         carrito.push(cuadroElegido);
-        alert("Se agrego la obra a tu carrito")
+        let tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${cuadroElegido.titulo}</td>
+            <td>$${cuadroElegido.precio}</td>
+            <td><button id="eliminar${cuadroElegido.id}" onclick="eliminar(${cuadroElegido.id})" type="button" class="btn btn-danger">X</button></td>
+        `;
+        itemsCarrito.append(tr);        
+    } 
+    
+}
+
+if (carrito.length ===0){
+    let tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>Todavia no elegiste ninguna obra</td>
+            
+        `;
+        itemsCarrito.append(tr);        
+}
+
+function eliminar (id){
+    console.log (id);
+    let eliminarCuadro = carrito.find (cuadro => id === cuadro.id);
+    if (eliminarCuadro){
+        let eliminado = carrito.indexOf(cuadro);
+        carrito.splice(eliminado, 1);
     }
-}
+} 
 
-comprar (`Ingresa el ID de la obra para agregarla al carrito o "x" para terminar.`);
 
-while (idElegido != "X"){
-    comprar (`Queres sumar otra? Ingresa el ID de la obra para agregarla al carrito o "x" para terminar.`);
-}
-console.log(carrito);
+
+
+/* 
 
 let total = 0;
 let seleccion = carrito.map (cuadro => {
@@ -99,8 +95,4 @@ El total a abonar es de $${total}
 
 Gracias por comprar arte ❤️`);
 
- */
-
-
-}
-window.onload = init;
+*/
