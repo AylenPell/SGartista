@@ -30,7 +30,7 @@ for(const cuadro of listaCuadros){
                 <p class="pNgo"> <span class="spBld">Precio:</span> $${cuadro.precio} </p>
             </div>
             <div class="divFcenter">
-                <button type="button" class="boton" id="agregar${cuadro.id}" onclick="agregar(${cuadro.id})">Lo quiero!</button>
+                <button type="button" class="boton" id="agregar${cuadro.id}" onclick="agregarItem(${cuadro.id})">Lo quiero!</button>
             </div>
         </div>
     `;
@@ -39,60 +39,65 @@ for(const cuadro of listaCuadros){
 
 // CARRITO DE COMPRAS
 let carrito = [];
+carrito = JSON.parse(localStorage.getItem("carrito"));
+if (!carrito) {
+    carrito = []
+};
+
+const guardarStorage = (clave, valor) => {localStorage.setItem(clave, valor)};
 
 let itemsCarrito = document.getElementById("itemsCarrito");
 
-function agregar (id){
+function agregarItem (id){
     console.log (id);
     let cuadroElegido = listaCuadros.find (cuadro => id === cuadro.id && cuadro.cantidad === 1);
-
     if (cuadroElegido){
-        carrito.push(cuadroElegido);
-        let tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${cuadroElegido.titulo}</td>
-            <td>$${cuadroElegido.precio}</td>
-            <td><button id="eliminar${cuadroElegido.id}" onclick="eliminar(${cuadroElegido.id})" type="button" class="btn btn-danger">X</button></td>
-        `;
-        itemsCarrito.append(tr);        
-    } 
-    
-}
+        let chequearCarro = carrito.find (cuadro => cuadroElegido.id === cuadro.id);
+        if (!chequearCarro){
+            carrito.push(cuadroElegido);
+            let tr = document.createElement("tr");
+            tr.id = "filaCarrito";
+            tr.innerHTML = `
+                <td>${cuadroElegido.titulo}</td>
+                <td>$${cuadroElegido.precio}</td>
+                <td><button id="eliminar${cuadroElegido.id}" onclick="borrarItem(${cuadroElegido.id})" type="button" class="btn btn-danger">X</button></td>
+            `;
+            itemsCarrito.append(tr);
 
-if (carrito.length ===0){
-    let tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>Todavia no elegiste ninguna obra</td>
-            
-        `;
-        itemsCarrito.append(tr);        
-}
+            guardarStorage("carrito", JSON.stringify(carrito));
+            alert (`Agregaste "${cuadroElegido.titulo}" al carrito`);
 
-function eliminar (id){
-    console.log (id);
-    let eliminarCuadro = carrito.find (cuadro => id === cuadro.id);
-    if (eliminarCuadro){
-        let eliminado = carrito.indexOf(cuadro);
-        carrito.splice(eliminado, 1);
+        } else if (chequearCarro){
+            alert ("Oops! Ya agregaste esta obra");
+        }     
     }
-} 
+}
+
+function sumarCarro (){
+        let totalCarro = 0;
+        carrito.forEach ( item => {
+            totalCarro = totalCarro + item.precio;
+        });
+    let thTotal = document.getElementById("thTotal");
+    thTotal.innerText = `
+    $${totalCarro}
+    `;    
+}
+
+let btnMostrarTotal = document.getElementById ("mostrarTotal");
+btnMostrarTotal.addEventListener("click", sumarCarro);
+
+function borrarItem(id){
+    let eliminarCuadro = carrito.find(cuadro => id === cuadro.id);
+    if (eliminarCuadro){
+        console.log("eliminando");
+        let eliminado = carrito.indexOf(eliminarCuadro);
+        carrito.splice(eliminado, 1);
+        let borrarFila = document.getElementById("filaCarrito");
+        borrarFila.remove();   
+        sumarCarro (); 
+    }
+}
 
 
 
-
-/* 
-
-let total = 0;
-let seleccion = carrito.map (cuadro => {
-    total = total + cuadro.precio;
-    
-    return `Titulo: ${cuadro.titulo} | Precio $${cuadro.precio} \n`
-});
-
-alert(`Buena eleccion! Seleccionaste:
-${seleccion}
-El total a abonar es de $${total}
-
-Gracias por comprar arte ❤️`);
-
-*/

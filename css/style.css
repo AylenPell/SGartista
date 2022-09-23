@@ -67,7 +67,11 @@ th, td{
     font-family: 'Quicksand', sans-serif;
     font-size: 0.5rem;
     font-weight: 600;
-
+}
+.raya{
+    background-color: black;
+    height: 1px;
+    width: 100%;
 }
 
 /* About Me */

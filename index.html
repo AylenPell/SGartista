@@ -40,21 +40,23 @@
                                 <a class="nav-link py-1 active gallery" aria-current="page" href="#formulario">Contacto</a>
                             </li>
                         </ul>
+                    <div class="raya"></div>
                     <div id="contenedorCarrito">
                         <a class="carro" aria-current="page" href="#gallery" id="linkCarrito">Carrito de compras</a>
                         <!-- Carrito de compras -->
-                        <table class="table">
+                        <table class="table align-middle">
                             <thead>
                                 <tr>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">Precio</th>
-                                <th></th>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Precio</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="itemsCarrito"></tbody>
                             <tfoot>
-                                <tr id="footer">
-                                <th scope="row" colspan="3">Odio al Sr Java Script</th>
+                                <tr id="trFooter">
+                                    <th scope="col" colspan="3"><button type="button" class="boton" id="mostrarTotal">Mostrar total</button></th>
+                                    <th id= "thTotal" scope="col"></th>
                                 </tr>
                             </tfoot>
                             </table>
@@ -220,7 +222,9 @@
         <a href="https://www.instagram.com/silviagentileartista/"></a><img class="icono" src="./img/iconoIg.png" alt="icono instagram"></a>
         <a href="#"></a><img class="icono" src="./img/iconoWp.png" alt="icono whatsapp"></a>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
     <script src="./js/index.js"></script>
     <script src="./js/contacto.js"> </script>
 </body>
