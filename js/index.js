@@ -39,14 +39,39 @@ for(const cuadro of listaCuadros){
 
 // CARRITO DE COMPRAS
 let carrito = [];
-carrito = JSON.parse(localStorage.getItem("carrito"));
-if (!carrito) {
-    carrito = []
-};
-
-const guardarStorage = (clave, valor) => {localStorage.setItem(clave, valor)};
 
 let itemsCarrito = document.getElementById("itemsCarrito");
+
+// chequear storage
+carrito = JSON.parse(localStorage.getItem("carrito"));
+if (!carrito) {
+    carrito = [];
+    console.log(carrito);
+    let tr = document.createElement("tr");
+            tr.id = "noHayNada";
+            tr.innerHTML = `
+                <td>Todavía no elegiste ninguna obra</td>
+            `;
+            itemsCarrito.append(tr);
+} else if(carrito.length > 0){
+    carrito = JSON.parse(localStorage.getItem("carrito"));
+    console.log(carrito);
+    for (const cuadro of carrito){
+        let tr = document.createElement("tr");
+        tr.id = "filaCarrito";
+        tr.innerHTML = `
+            <td>${cuadro.titulo}</td>
+            <td>$${cuadro.precio}</td>
+            <td><button id="eliminar${cuadro.id}" onclick="borrarItem(${cuadro.id})" type="button" class="btn btn-danger">X</button></td>
+        `;
+        itemsCarrito.append(tr);
+    }
+}
+
+// funcionamiento carrito
+const guardarStorage = (clave, valor) => {localStorage.setItem(clave, valor)};
+
+let noHayNada = document.getElementById ("noHayNada"); 
 
 function agregarItem (id){
     console.log (id);
@@ -55,6 +80,7 @@ function agregarItem (id){
         let chequearCarro = carrito.find (cuadro => cuadroElegido.id === cuadro.id);
         if (!chequearCarro){
             carrito.push(cuadroElegido);
+            noHayNada?.remove();
             let tr = document.createElement("tr");
             tr.id = "filaCarrito";
             tr.innerHTML = `
@@ -94,9 +120,12 @@ function borrarItem(id){
         let eliminado = carrito.indexOf(eliminarCuadro);
         carrito.splice(eliminado, 1);
         let borrarFila = document.getElementById("filaCarrito");
-        borrarFila.remove();   
+        borrarFila.remove(); 
+        localStorage.removeItem("carrito");
+        guardarStorage("carrito", JSON.stringify(carrito));
         sumarCarro (); 
     }
+
 }
 
 
