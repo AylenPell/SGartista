@@ -21,7 +21,7 @@ for(const cuadro of listaCuadros){
     div.innerHTML = `
         <div class="divCard"> 
             <div class="divFcenter">
-                <img class="imgCard" src=${cuadro.imagen} alt=${cuadro.titulo}> 
+                <img class="imgCard" id="img${cuadro.id}" src=${cuadro.imagen} alt=${cuadro.titulo}> 
             </div> 
             <div>   
                 <h2 class="h2Ngo"> ${cuadro.titulo} </h2>
@@ -37,6 +37,8 @@ for(const cuadro of listaCuadros){
     contGallery.append(div);
 }
 
+
+
 // CARRITO DE COMPRAS
 let carrito = [];
 
@@ -44,9 +46,8 @@ let itemsCarrito = document.getElementById("itemsCarrito");
 
 // chequear storage
 carrito = JSON.parse(localStorage.getItem("carrito"));
-if (!carrito) {
+if (!carrito || carrito.length === 0) {
     carrito = [];
-    console.log(carrito);
     let tr = document.createElement("tr");
             tr.id = "noHayNada";
             tr.innerHTML = `
@@ -91,10 +92,26 @@ function agregarItem (id){
             itemsCarrito.append(tr);
 
             guardarStorage("carrito", JSON.stringify(carrito));
-            alert (`Agregaste "${cuadroElegido.titulo}" al carrito`);
+            //alert (`Agregaste "${cuadroElegido.titulo}" al carrito`);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: `Buena elección!`,
+                text: `Agregaste "${cuadroElegido.titulo}" al carrito`,
+                showConfirmButton: false,
+                timer: 1500
+            });
 
         } else if (chequearCarro){
-            alert ("Oops! Ya agregaste esta obra");
+            //alert ("Oops! Ya agregaste esta obra");
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: `Oops!`,
+                text: `Ya agregaste esta obra`,
+                showConfirmButton: false,
+                timer: 1000
+            });
         }     
     }
 }
@@ -125,7 +142,14 @@ function borrarItem(id){
         guardarStorage("carrito", JSON.stringify(carrito));
         sumarCarro (); 
     }
-
+    if (carrito.length === 0){
+        let tr = document.createElement("tr");
+        tr.id = "noHayNada";
+        tr.innerHTML = `
+            <td>El carrito quedó vacío</td>
+        `;
+        itemsCarrito.append(tr);
+    }
 }
 
 
