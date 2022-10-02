@@ -6,12 +6,19 @@ function recogeDatos (evento) {
 
     let nombre = document.querySelector("#nombre").value;
     let cel = document.querySelector("#cel").value;
-   // let mensaje = document.querySelector("#mensaje");
-    let texto = `Hola ${nombre}, 😊 tu mensaje ha sido enviado!
-                Te estare contactando al celular ${cel} para responderte.`;
+
+    if (nombre && cel){
+        let texto = `Hola ${nombre}, 😊 tu mensaje ha sido enviado!
+                    Te estaré contactando al celular ${cel} para responderte.`;
     
     mensaje.textContent = texto;
+    } else if (!nombre && !cel){
+        let texto = `Oops! Parece que te faltó completar algún dato... 😅`;
+    
+    mensaje.textContent = texto;
+    }
 }
+
 function eliminar () {
     mensaje.remove();       
 }

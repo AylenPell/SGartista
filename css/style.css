@@ -8,43 +8,58 @@
 }
 
 /* NAV */
+.navbar{
+    background-color: #FFF6F1 !important;
+}
 .marca{
+    width: 12rem;
     height: 3rem;
+    border: 1px;
+    border-style: solid;
+    border-color: #201D1D;
 }
 .silvia{
     height: 2rem;
-    margin-right: 0;
-    padding: 0;
-    font-family: 'Zeyada', cursive;
-    color: black;
-    font-size: 2rem;
-    font-weight: 550;
+    width: 100%;
+    margin: 0;
+    padding: 0.2rem 0 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #201D1D;
+    font-size: 1.2rem;
+    font-weight: 400;
+    border: 0px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #201D1D;
 }
 .artista{
     margin-bottom: 0.2rem;
     padding-top: 0;
     font-family: 'Quicksand', sans-serif;
-    color: black;
+    color: #201D1D;
     font-size: 0.7rem;
     font-weight: 500;
 }
 ul, li, .carro{
     font-family: 'Quicksand', sans-serif;
-    color: black;
+    color: #201D1D;
+    font-weight: 500;
     font-size: 0.7rem;
 }
 a{
     text-decoration: none;
 }
 a:hover{
-    color: #660066 !important;
+    color: #892473 !important;
     font-weight: 600 !important;
 }
 .navbar-toggler{
+    border: 0;
     padding: 0.1rem 0.25rem;
     font-size: 0.8rem;
 }
 .offcanvas-end {
+    background-color: #FFF6F1;
     width: 275px;
 }
 .btn-sm, .form-control{
@@ -124,6 +139,7 @@ img{
     font-weight: 500;
 }
 .secFondoBco{
+    background-color: #FFF6F1;
     padding: 0.7rem 1rem 2rem;
 }
 
@@ -132,6 +148,9 @@ img{
     width: 95%;
     margin: 0;
     background-color: black;
+}
+.carruNews{
+    height: 15rem;
 }
 .h3Bco{
     padding: 1rem 1rem 0.5rem;
@@ -162,7 +181,7 @@ img{
 .divCard{
     display: grid;
     grid-template-rows: 1fr 1fr 0.1fr;
-    background-color: aliceblue;
+    background-color: #FFF6F1;
     width: 10rem;
     height: 21rem;
     margin: 0.5rem;
@@ -263,16 +282,20 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: right;
-    background-color:white;
+    align-items: center;
+    background-color: #FFF6F1;
     padding: 1rem;
     font-family: 'Quicksand', sans-serif;
     font-style: italic;
-    color: white;
+    color: black;
     font-size: small;
     font-weight: 300;
 }
+.pFoot{
+    margin: 0;
+}
 .icono{
-    width: 40px;
+    width: 25px;
     height: auto;
     margin-left: 1rem;
 }
