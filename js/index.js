@@ -69,7 +69,7 @@ if (!carrito || carrito.length === 0) {
     }
 }
 
-// funcionamiento carrito
+// agregar item al carrito y guardarlo en el localStorage
 const guardarStorage = (clave, valor) => {localStorage.setItem(clave, valor)};
 
 let noHayNada = document.getElementById ("noHayNada"); 
@@ -116,6 +116,7 @@ function agregarItem (id){
     }
 }
 
+// sumar $$ total del carrito
 function sumarCarro (){
         let totalCarro = 0;
         carrito.forEach ( item => {
@@ -127,9 +128,15 @@ function sumarCarro (){
     `;    
 }
 
-let btnMostrarTotal = document.getElementById ("mostrarTotal");
-btnMostrarTotal.addEventListener("click", sumarCarro);
+if (carrito){
+    sumarCarro ();
+}
 
+/* let btnMostrarTotal = document.getElementById ("mostrarTotal");
+btnMostrarTotal.addEventListener("click", sumarCarro); */
+
+
+// borrar item del carrito
 function borrarItem(id){
     let eliminarCuadro = carrito.find(cuadro => id === cuadro.id);
     if (eliminarCuadro){

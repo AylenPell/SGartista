@@ -5,7 +5,7 @@ let listaCuadros = [];
 
 const buildGallery = async () => {
     try{
-        let response = await fetch("../json/cuadros.json");
+        let response = await fetch("./json/cuadros.json");
         listaCuadros = await response.json();
 
         listaCuadros.forEach(cuadro => {
@@ -31,7 +31,7 @@ const buildGallery = async () => {
     } catch (error) {
         let div = document.createElement ("div");
         div.innerHTML = `
-                    <h3>Oops! Algo pasó! 💣 Intentalo de nuevo más tarde</h3>
+                    <pBco>Oops! Algo pasó! 💣 Inténtalo de nuevo más tarde</p>
         `;
         contGallery.append(div);
     };
@@ -69,7 +69,7 @@ if (!carrito || carrito.length === 0) {
     }
 }
 
-// funcionamiento carrito
+// agregar item al carrito y guardarlo en el localStorage
 const guardarStorage = (clave, valor) => {localStorage.setItem(clave, valor)};
 
 let noHayNada = document.getElementById ("noHayNada"); 
@@ -116,6 +116,7 @@ function agregarItem (id){
     }
 }
 
+// sumar $$ total del carrito
 function sumarCarro (){
         let totalCarro = 0;
         carrito.forEach ( item => {
@@ -127,13 +128,14 @@ function sumarCarro (){
     `;    
 }
 
-if (carrito){
+if (carrito.length >= 1){
     sumarCarro ();
 }
 
 /* let btnMostrarTotal = document.getElementById ("mostrarTotal");
 btnMostrarTotal.addEventListener("click", sumarCarro); */
 
+// borrar item del carrito
 function borrarItem(id){
     let eliminarCuadro = carrito.find(cuadro => id === cuadro.id);
     if (eliminarCuadro){
