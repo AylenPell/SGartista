@@ -41,7 +41,6 @@ buildGallery ();
 
 // CARRITO DE COMPRAS
 let carrito = [];
-
 let itemsCarrito = document.getElementById("itemsCarrito");
 
 // chequear storage
@@ -72,25 +71,26 @@ if (!carrito || carrito.length === 0) {
 // agregar item al carrito y guardarlo en el localStorage
 const guardarStorage = (clave, valor) => {localStorage.setItem(clave, valor)};
 
-let noHayNada = document.getElementById ("noHayNada"); 
-
 function agregarItem (id){
     console.log (id);
+    let noHayNada = document.getElementById ("noHayNada"); 
     let cuadroElegido = listaCuadros.find (cuadro => id === cuadro.id && cuadro.cantidad === 1);
     if (cuadroElegido){
         let chequearCarro = carrito.find (cuadro => cuadroElegido.id === cuadro.id);
         if (!chequearCarro){
             carrito.push(cuadroElegido);
+            console.log(noHayNada);
             noHayNada?.remove();
             let tr = document.createElement("tr");
-            tr.id = "filaCarrito";
+            tr.id = `filaCarrito${cuadroElegido.id}`;
             tr.innerHTML = `
                 <td>${cuadroElegido.titulo}</td>
                 <td>$${cuadroElegido.precio}</td>
                 <td><button id="eliminar${cuadroElegido.id}" onclick="borrarItem(${cuadroElegido.id})" type="button" class="btn btn-danger">X</button></td>
             `;
             itemsCarrito.append(tr);
-
+            sumarCarro();
+            
             guardarStorage("carrito", JSON.stringify(carrito));
             //alert (`Agregaste "${cuadroElegido.titulo}" al carrito`);
             Swal.fire({
@@ -113,6 +113,15 @@ function agregarItem (id){
                 timer: 1000
             });
         }     
+    } else if (cuadroElegido.cantidad === 0){
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: `Oops!`,
+            text: `Esta obra ya no está disponible`,
+            showConfirmButton: false,
+            timer: 1000
+        });
     }
 }
 
@@ -128,12 +137,18 @@ function sumarCarro (){
     `;    
 }
 
-if (carrito.length >= 1){
+if (carrito){
     sumarCarro ();
-}
 
-/* let btnMostrarTotal = document.getElementById ("mostrarTotal");
-btnMostrarTotal.addEventListener("click", sumarCarro); */
+    let trFooter = document.getElementById ("trFooter");
+    trFooter.innerHTML = `
+    <th scope="col" colspan="1"><button type="button" class="boton" id="finalizarCompra">Finalizar compra</button></th>
+    `;
+}
+let btnFinCompra = document.getElementById ("finalizarCompra");
+btnFinCompra.addEventListener("click", () =>{
+    Swal.fire('Futuro resumen de la compra y mensaje')
+});
 
 // borrar item del carrito
 function borrarItem(id){
@@ -142,7 +157,7 @@ function borrarItem(id){
         console.log("eliminando");
         let eliminado = carrito.indexOf(eliminarCuadro);
         carrito.splice(eliminado, 1);
-        let borrarFila = document.getElementById("filaCarrito");
+        let borrarFila = document.getElementById(`filaCarrito${eliminarCuadro.id}`);
         borrarFila.remove(); 
         localStorage.removeItem("carrito");
         guardarStorage("carrito", JSON.stringify(carrito));

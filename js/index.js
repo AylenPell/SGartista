@@ -72,10 +72,9 @@ if (!carrito || carrito.length === 0) {
 // agregar item al carrito y guardarlo en el localStorage
 const guardarStorage = (clave, valor) => {localStorage.setItem(clave, valor)};
 
-let noHayNada = document.getElementById ("noHayNada"); 
-
 function agregarItem (id){
     console.log (id);
+    let noHayNada = document.getElementById ("noHayNada"); 
     let cuadroElegido = listaCuadros.find (cuadro => id === cuadro.id && cuadro.cantidad === 1);
     if (cuadroElegido){
         let chequearCarro = carrito.find (cuadro => cuadroElegido.id === cuadro.id);
