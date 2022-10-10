@@ -99,7 +99,7 @@ function agregarItem (id){
                 title: `Buena elección!`,
                 text: `Agregaste "${cuadroElegido.titulo}" al carrito`,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 2000
             });
 
         } else if (chequearCarro){
