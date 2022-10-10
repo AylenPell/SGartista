@@ -6,13 +6,15 @@ function recogeDatos (evento) {
 
     let nombre = document.querySelector("#nombre").value;
     let cel = document.querySelector("#cel").value;
+    let mail = document.querySelector("#mail").value;
+    let msg = document.querySelector("#msg").value;
 
-    if (nombre && cel){
+    if (nombre && cel && mail && msg){
         let texto = `Hola ${nombre}, 😊 tu mensaje ha sido enviado!
                     Te estaré contactando al celular ${cel} para responderte.`;
     
     mensaje.textContent = texto;
-    } else if (!nombre && !cel){
+    } else if (!nombre && !cel && !mail && !msg){
         let texto = `Oops! Parece que te faltó completar algún dato... 😅`;
     
     mensaje.textContent = texto;

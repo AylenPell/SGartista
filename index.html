@@ -76,7 +76,7 @@
     </header>
 
     <main>
-        <div>
+        <div class="containerCarrusel">
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -85,13 +85,13 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="10000">
-                        <img img src="./img/mujer.jpg" alt="acrílico y tinta sobre papel" class="d-block w-100 h-100 mh-100 mt-5">
+                        <img img src="./img/mujer.jpg" alt="acrílico y tinta sobre papel" class="imgCarrusel d-block w-100 h-100 mh-100 mt-lg-0">
                     </div>
                     <div class="carousel-item" data-bs-interval="2000">
-                    <img img src="./img/señor.jpg" alt="acrílico y tinta sobre papel" class="d-block w-100 h-100 mh-100 mt-5">
+                    <img img src="./img/señor.jpg" alt="acrílico y tinta sobre papel" class="imgCarrusel d-block w-100 h-100 mh-100 mt-lg-0">
                     </div>
                     <div class="carousel-item">
-                        <img img src="./img/danzaButoh.jpg" alt="acrílico y tinta sobre papel" class="d-block w-100 h-100 mh-100 mt-5">
+                        <img img src="./img/danzaButoh.jpg" alt="acrílico y tinta sobre papel" class="imgCarrusel d-block w-100 h-100 mh-100 mt-lg-0">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -105,7 +105,7 @@
                 </div>
         </div>
 
-        <div class="containerFcol secFondoBco" id="aboutMe">
+        <div class="containerPerfil containerFcol secFondoBco" id="aboutMe">
             <img class="perfil" src="./img/perfil.png" alt="foto de la artista">
             <div class="texto">
                 <p>Hola! Mi nombre es Silvia Gentile, soy médica cardióloga y artista plástica de la ciudad de Buenos Aires, Argentina. </p>
@@ -123,11 +123,11 @@
             <!-- cards cuadros -->
         </div>
     </section>
-
-    <section class="secFondoBco" id="news">
+    <div class="containerNyC">
+    <section class="secFondoBco secNov" id="news">
         <h1 class="h1fBco">Novedades</h1>
-        <div>
-            <div class="containerFcol">
+        <div class="containerNovedades">
+            <div class="containerFcol containerCarrusel1">
                 <div id="carouselExampleControls" class="carousel slide carrusel" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -151,9 +151,9 @@
                     <p class="pBco">Finalmente salió la versión en papel. Gracias a APDH por seleccionar mi obra para ser parte de este libro. Es para mi un honor y una gran alegría!</p>
                 </div>
             </div>
-        </div>
-        <div class="espacio">
-            <div class="containerFcol">
+        
+
+            <div class="containerFcol containerCarrusel2">
                 <div id="carouselExampleControls2" class="carousel slide carrusel" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -189,8 +189,8 @@
         </div>
     </section>
 
-    <section class="secFondoNg" id="formulario">
-        <h1 class="h1fNg">Contacto</h1>
+    <section class="secFondoNg secFormu" id="formulario">
+        <h1 class="h1fNg h1query">Contacto</h1>
         <div class="formContacto">
             <form id="formContacto">
                 <ul class="ulForm">
@@ -204,7 +204,7 @@
                         <input type="email" id="mail" autocomplete="email" placeholder="E-mail">
                     </li>
                     <li class="liForm">
-                        <textarea name="msg" placeholder="Escribí tu mensaje aquí..."></textarea>
+                        <textarea name="msg" id="msg" placeholder="Escribí tu mensaje aquí..."></textarea>
                     </li>
                     <li class="d-flex justify-content-between">
                         <button type="reset" class="botonForm" id="btnB"> BORRAR </button>
@@ -212,11 +212,12 @@
                     </li>
                 </ul>
             </form>
-            <div id="mensaje" class="pBco">
+            <div id="mensaje" class="pBco pMsj">
                 <!-- mensaje de enviado -->
             </div>
         </div>
     </section>
+    </div>
     <section id="modal">
         <!-- Modal -->
     </section>
