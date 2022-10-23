@@ -13,7 +13,7 @@ const buildGallery = async () => {
             div.innerHTML = `
                 <div class="divCard"> 
                     <div class="divFcenter">
-                        <img class="imgCard" id="img${cuadro.id}" src=${cuadro.imagen} alt=${cuadro.titulo}> 
+                        <img class="imgCard" id="img${cuadro.id}" src=${cuadro.imagen} alt=${cuadro.titulo}>
                     </div> 
                     <div>   
                         <h2 class="h2Ngo"> ${cuadro.titulo} </h2>
@@ -39,6 +39,10 @@ const buildGallery = async () => {
     
 buildGallery ();
 
+// zoom imagenes
+
+
+
 // CARRITO DE COMPRAS
 let carrito = [];
 let itemsCarrito = document.getElementById("itemsCarrito");
@@ -52,13 +56,13 @@ if (!carrito || carrito.length === 0) {
             tr.innerHTML = `
                 <td>Todavía no elegiste ninguna obra</td>
             `;
-            itemsCarrito.append(tr);
+            itemsCarrito.append(tr);          
 } else if(carrito.length > 0){
     carrito = JSON.parse(localStorage.getItem("carrito"));
     console.log(carrito);
     for (const cuadro of carrito){
         let tr = document.createElement("tr");
-        tr.id = "filaCarrito";
+        tr.id = `filaCarrito${cuadro.id}`;
         tr.innerHTML = `
             <td>${cuadro.titulo}</td>
             <td>$${cuadro.precio}</td>
@@ -92,7 +96,7 @@ function agregarItem (id){
             sumarCarro();
             
             guardarStorage("carrito", JSON.stringify(carrito));
-            //alert (`Agregaste "${cuadroElegido.titulo}" al carrito`);
+            
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -103,14 +107,14 @@ function agregarItem (id){
             });
 
         } else if (chequearCarro){
-            //alert ("Oops! Ya agregaste esta obra");
+            
             Swal.fire({
                 position: 'center',
                 icon: 'warning',
                 title: `Oops!`,
                 text: `Ya agregaste esta obra`,
                 showConfirmButton: false,
-                timer: 1000
+                timer: 1500
             });
         }     
     } else if (cuadroElegido.cantidad === 0){
@@ -126,8 +130,9 @@ function agregarItem (id){
 }
 
 // sumar $$ total del carrito
+let totalCarro = 0;
 function sumarCarro (){
-        let totalCarro = 0;
+        //let totalCarro = 0;
         carrito.forEach ( item => {
             totalCarro = totalCarro + item.precio;
         });
@@ -135,20 +140,76 @@ function sumarCarro (){
     thTotal.innerText = `
     Total: $${totalCarro}
     `;    
+    let trFooter = document.getElementById ("trFooter");
+    trFooter.innerHTML = `
+    <th scope="col" colspan="1"><button type="button" class="boton" data-bs-toggle="modal" data-bs-target="#modalCompra" id="finalizarCompra">Finalizar compra</button></th>
+    `;
 }
+
 
 if (carrito){
     sumarCarro ();
-
-    let trFooter = document.getElementById ("trFooter");
-    trFooter.innerHTML = `
-    <th scope="col" colspan="1"><button type="button" class="boton" id="finalizarCompra">Finalizar compra</button></th>
-    `;
 }
+
 let btnFinCompra = document.getElementById ("finalizarCompra");
+if (carrito.length === 0){
+    btnFinCompra?.remove();
+}
+
+// finalizar compra
+let resumenCompra;
+let filaResumen;
+
 btnFinCompra.addEventListener("click", () =>{
-    Swal.fire('Futuro resumen de la compra y mensaje')
+    resumenCompra = document.getElementById("resumenCompra");
+    for (const cuadro of carrito){
+        let div1 = document.createElement("div");
+        div1.id= "filaResumen";
+        div1.innerHTML= `
+            <div>
+            </div>
+        `,
+        resumenCompra.append(div1);
+
+        filaResumen = document.getElementById("filaResumen");
+        let div2 = document.createElement("div");
+        div2.id = `filaResumen${cuadro.id}`;
+        div2.className="row";
+        div2.innerHTML = `
+            <div class="col-6 col-sm-4">
+            <p class="pNgo">${cuadro.titulo}</p>
+            </div>
+            <div class="col-4 col-sm-2">
+            <p class="pNgo">$${cuadro.precio}</p>
+            </div>
+        `;
+        filaResumen.append(div2);
+    }
+    let resumenTotal = document.getElementById("resumenTotal");
+    let div = document.createElement("div");
+        div.id = "filaTotal";
+        div.innerHTML = `
+            <p class="pNgo"><strong>Total:</strong></p>
+            <p class="pNgo">$${totalCarro}</p>    
+        `;
+        resumenTotal.append(div); 
 });
+
+// borrar contenido modal al salir
+
+const vaciarModal = () => {
+    let filaTotal = document.getElementById("filaTotal");
+    filaResumen.remove();
+    filaTotal.remove();
+}; 
+
+let btnVolver = document.getElementById("btnVolver");
+let btnCerrarModal = document.getElementById("btnCerrarModal");
+
+btnVolver.addEventListener("click", vaciarModal); 
+btnCerrarModal.addEventListener("click", vaciarModal);  
+
+
 
 // borrar item del carrito
 function borrarItem(id){
@@ -170,6 +231,7 @@ function borrarItem(id){
             <td>El carrito quedó vacío</td>
         `;
         itemsCarrito.append(tr);
+        btnFinCompra.remove();
     }
 }
 

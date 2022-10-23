@@ -240,6 +240,48 @@ img{
     justify-content: space-evenly;
 }
 
+/* Alerts*/
+.swal2-title{
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.swal2-html-container{
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* modal */
+.modalC{
+    background-color: #FFF6F1;   
+}
+.modalTitulo{
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.pModal{
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+.divModal{
+    margin-left: 1rem;
+    margin-bottom: 0.7rem;
+}
+.ulModal{
+    margin-bottom: 0;
+    margin-left: 0.7rem;
+    padding-left: 0;
+}
+
 /* FORMULARIO */
 .formContacto{
     border: 0;

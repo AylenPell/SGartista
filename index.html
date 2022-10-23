@@ -218,8 +218,49 @@
         </div>
     </section>
     </div>
-    <section id="modal">
-        <!-- Modal -->
+    <section class="containerModales">
+        <div class="modal fade" id="modalCompra" tabindex="-1" aria-labelledby="finalizarCompra" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modalC">
+                    <div class="modal-header">
+                        <h5 class="modalTitulo" id="exampleModalLabel">Finalizar compra</h5>
+                        <button type="button" id="btnCerrarModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formCompra">
+                            <ul class="ulModal">
+                                <li class="liForm"> 
+                                    <p class="pModal"> Completa tus datos </p>
+                                </li>
+                                <li class="liForm">
+                                    <input type="text" id="nombreAp" autocomplete="name" placeholder="Nombre y apellido">
+                                </li>
+                                <li class="liForm">
+                                    <input type="number" id="celu" autocomplete="tel" placeholder="Celular">
+                                </li>
+                                <li class="liForm">
+                                    <input type="email" id="email" autocomplete="email" placeholder="E-mail">
+                                </li>
+                                <li class="liForm">
+                                    <p class="pModal">Resumen de la compra:</p>
+                                </li>
+                            </ul>
+                        </form>
+                        
+                        <div class="divModal" id="resumenCompra">
+                            <!-- resumen compra -->
+                        </div>
+                        <div class="divModal" id="resumenTotal">
+                            <!-- total compra -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="boton" data-bs-dismiss="modal" id="btnVolver">Volver</button>
+                        <button type="button" class="boton">Enviar compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <footer>
         <p class="pFoot">Sitio en construcción by <a href="https://github.com/AylenPell">Aylen Pell.</a></p>
