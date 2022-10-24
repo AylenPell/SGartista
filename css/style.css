@@ -240,7 +240,7 @@ img{
     justify-content: space-evenly;
 }
 
-/* Alerts*/
+/* Sweet Alerts*/
 .swal2-title{
     font-family: 'Quicksand', sans-serif;
     color: white;
@@ -253,6 +253,20 @@ img{
     font-size: 1rem;
     text-align: center;
 }
+.swal2-styled, .swal2-confirm {
+    background-color: #FFF6F1 !important;
+    font-family: 'Quicksand', sans-serif !important;
+    color: black !important;
+    font-size: 0.6rem !important;
+    font-weight: 600 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0;
+    height: 1rem;
+    width: 8rem;
+    text-align: center;
+}
+
 
 /* modal */
 .modalC{
@@ -362,6 +376,10 @@ footer{
         grid-area: containerPerfil;
         padding: 0;
         background-color: whitesmoke;
+    }
+    .perfil{
+        width: 50%;
+        height: auto;
     }
     .firma{
         margin: 0;

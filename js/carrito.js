@@ -27,6 +27,17 @@ const buildGallery = async () => {
                 </div>
             `;
             contGallery.append(div);
+
+            // zoom imagenes
+            let zoomImg = document.getElementById(`img${cuadro.id}`);
+            zoomImg.addEventListener("click", () =>{
+                Swal.fire({
+                    imageUrl: `${cuadro.imagen}`,
+                    imageHeight: 600,
+                    imageAlt: `${cuadro.titulo}`,
+                    confirmButtonText: 'Cerrar'
+                });
+            });
         });
     } catch (error) {
         let div = document.createElement ("div");
@@ -38,9 +49,6 @@ const buildGallery = async () => {
 };
     
 buildGallery ();
-
-// zoom imagenes
-
 
 
 // CARRITO DE COMPRAS
@@ -83,7 +91,6 @@ function agregarItem (id){
         let chequearCarro = carrito.find (cuadro => cuadroElegido.id === cuadro.id);
         if (!chequearCarro){
             carrito.push(cuadroElegido);
-            console.log(noHayNada);
             noHayNada?.remove();
             let tr = document.createElement("tr");
             tr.id = `filaCarrito${cuadroElegido.id}`;
@@ -96,7 +103,8 @@ function agregarItem (id){
             sumarCarro();
             
             guardarStorage("carrito", JSON.stringify(carrito));
-            
+            console.log(carrito);
+
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -106,8 +114,7 @@ function agregarItem (id){
                 timer: 2000
             });
 
-        } else if (chequearCarro){
-            
+        } else if (chequearCarro){            
             Swal.fire({
                 position: 'center',
                 icon: 'warning',
@@ -131,38 +138,33 @@ function agregarItem (id){
 
 // sumar $$ total del carrito
 let totalCarro = 0;
+
 function sumarCarro (){
-        //let totalCarro = 0;
+    totalCarro = 0;
         carrito.forEach ( item => {
             totalCarro = totalCarro + item.precio;
         });
+        
     let thTotal = document.getElementById("thTotal");
     thTotal.innerText = `
     Total: $${totalCarro}
     `;    
-    let trFooter = document.getElementById ("trFooter");
-    trFooter.innerHTML = `
-    <th scope="col" colspan="1"><button type="button" class="boton" data-bs-toggle="modal" data-bs-target="#modalCompra" id="finalizarCompra">Finalizar compra</button></th>
-    `;
+    
 }
-
 
 if (carrito){
     sumarCarro ();
 }
 
-let btnFinCompra = document.getElementById ("finalizarCompra");
-if (carrito.length === 0){
-    btnFinCompra?.remove();
-}
-
 // finalizar compra
+let btnFinCompra = document.getElementById ("finalizarCompra");
 let resumenCompra;
 let filaResumen;
 
 btnFinCompra.addEventListener("click", () =>{
     resumenCompra = document.getElementById("resumenCompra");
     for (const cuadro of carrito){
+        console.log("finalizar compra");
         let div1 = document.createElement("div");
         div1.id= "filaResumen";
         div1.innerHTML= `
@@ -199,8 +201,9 @@ btnFinCompra.addEventListener("click", () =>{
 
 const vaciarModal = () => {
     let filaTotal = document.getElementById("filaTotal");
-    filaResumen.remove();
-    filaTotal.remove();
+    filaResumen?.remove();
+    filaTotal?.remove();
+    console.log("vaciar modal al salir");
 }; 
 
 let btnVolver = document.getElementById("btnVolver");
@@ -209,7 +212,35 @@ let btnCerrarModal = document.getElementById("btnCerrarModal");
 btnVolver.addEventListener("click", vaciarModal); 
 btnCerrarModal.addEventListener("click", vaciarModal);  
 
+// enviar compra
+let btnEnviarcompra = document.getElementById("btnEnviarCompra");
 
+btnEnviarcompra.addEventListener("click", (evento) =>{
+    evento.preventDefault ();
+    let nombreCompra = document.querySelector("#nombreCompra").value;
+    let celCompra = document.querySelector("#celCompra").value;
+    let mailCompra = document.querySelector("#mailCompra").value;
+    if (nombreCompra && celCompra && mailCompra){
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Gracias por comprar arte 💛',
+        text: 'Tu pedido ha sido enviado! Te contactaré en los próximos días para coordinar el envío',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 4000
+        })
+    } else if (!nombreCompra || !celCompra || !mailCompra){
+        Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: `Oops!`,
+        text: `Parece que te faltó algo... 😅`,
+        showConfirmButton: false,
+        timer: 2000
+        })
+    } 
+});
 
 // borrar item del carrito
 function borrarItem(id){
@@ -231,7 +262,6 @@ function borrarItem(id){
             <td>El carrito quedó vacío</td>
         `;
         itemsCarrito.append(tr);
-        btnFinCompra.remove();
     }
 }
 
