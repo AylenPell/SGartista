@@ -34,6 +34,7 @@ const buildGallery = async () => {
                 Swal.fire({
                     imageUrl: `${cuadro.imagen}`,
                     imageHeight: 600,
+                    imageWidth: 448,
                     imageAlt: `${cuadro.titulo}`,
                     confirmButtonText: 'Cerrar'
                 });
@@ -64,7 +65,8 @@ if (!carrito || carrito.length === 0) {
             tr.innerHTML = `
                 <td>Todavía no elegiste ninguna obra</td>
             `;
-            itemsCarrito.append(tr);          
+            itemsCarrito.append(tr);  
+        
 } else if(carrito.length > 0){
     carrito = JSON.parse(localStorage.getItem("carrito"));
     console.log(carrito);
